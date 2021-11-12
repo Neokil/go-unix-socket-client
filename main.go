@@ -10,8 +10,12 @@ import (
 )
 
 func main() {
-	s := flag.String("socket", "/tmp/go-ipc-pipe.sock", "Specifies the socket to connect to")
+	s := flag.String("socket", "", "Specifies the socket to connect to")
 	flag.Parse()
+
+	if s == nil || *s == "" {
+		panic("-socket parameter is required")
+	}
 
 	r := bufio.NewReader(os.Stdin)
 	for {
